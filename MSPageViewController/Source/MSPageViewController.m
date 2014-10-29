@@ -75,12 +75,16 @@
       viewControllerBeforeViewController:(UIViewController<MSPageViewControllerChild> *)viewController {
     const NSInteger index = viewController.pageIndex;
     
+    [self pageChangedToIndex:index];
+    
     return (index == NSNotFound) ? nil : [self viewControllerAtIndex:index - 1];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController<MSPageViewControllerChild> *)viewController {
     const NSInteger index = viewController.pageIndex;
+    
+    [self pageChangedToIndex:index];
     
     return (index == NSNotFound) ? nil : [self viewControllerAtIndex:index + 1];
 }
@@ -118,6 +122,9 @@
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
     return [pageViewController.viewControllers.lastObject pageIndex];
+}
+
+- (void)pageChangedToIndex: (NSInteger)pageIndex {
 }
 
 @end
